@@ -10,11 +10,12 @@ dotenv.config();
 const app = express();
 const PORT = 8000;
 
-// Middleware - Order matters!
+app.use(express.json())
+
+
 app.use(cors());
 
-// Use body-parser middleware
-app.use(bodyParser.json()); // This will parse JSON data in the request body
+
 app.use(bodyParser.urlencoded({ extended: false })); // This will parse URL-encoded data in the request body
 
 // MongoDB connection

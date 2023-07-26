@@ -1,28 +1,28 @@
 const Todo = require("../Model/Todo")
-const getTodos = (req, res) => {
-    res.send("I am the get todos route");
+const getTodos = async (req, res) => {
+    const data =  await Todo.find()
+    res.send({ total : data.length , data : data });
 };
-const createTodo = (req, res) => {
-    const todoData = req.body;
-    console.log(todoData,'req')
-
-    if (!todoData || !todoData.title) {
-      return res.status(400).json({ error: "Todo title is missing or invalid." });
-    }
-    const todo = new Todo({
-      title: req.body.title,
-      description: req.body.description,
-      completed: req.body.completed,
-    });
+const createTodo = async (req, res) => {
   
-    todo.save((err, todo) => {
-      if (err) {
-        res.send(err);
+  try{
+      const data = {
+         title: req.body.title,
+         description: req.body.description,
+          completed: req.body.completed,
       }
-      res.json(todo);
-    });
-  };
+    
+      const newdata = await Todo.create(data)
+    
+      res.status(201).send({ message: "data created" , data : newdata })
+
+    }catch(err){
+      res.status(404).send({ message: "data not created" })
+    }
+
+};
   
+
 module.exports = {
     getTodos,
     createTodo
