@@ -3,7 +3,7 @@ const router = require("./router");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const bodyParser = require("body-parser"); // Import the body-parser package
+const bodyParser = require("body-parser"); 
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(cors());
 
 
-app.use(bodyParser.urlencoded({ extended: false })); // This will parse URL-encoded data in the request body
+app.use(bodyParser.urlencoded({ extended: false })); 
 
 // MongoDB connection
 mongoose
@@ -26,7 +26,7 @@ mongoose
     })
     .then(() => {
         console.log("Connected to MongoDB");
-        // Start the server after successful database connection
+      
         app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
     })
     .catch((err) => {
